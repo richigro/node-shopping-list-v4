@@ -111,7 +111,7 @@ app.delete('/recipes/:id', (req, res) => {
   res.status(204).end();
 });
 
-app.put("/recipes/:id", bodyParser, (req, res) => {
+app.put("/recipes/:id", jsonParser, (req, res) => {
   const requiredFields = ["name", "ingredients"];
   for(let i = 0; i < requiredFields.length; i++) {
     const fields = requiredFields[i];
@@ -126,10 +126,10 @@ app.put("/recipes/:id", bodyParser, (req, res) => {
       return res.status(400).send(message);
     }
     console.log(`Updating Recipe item \`${req.params.id}\``);
-    Recipe.update({
+    Recipes.update({
       id: req.params.id,
       name: req.body.name,
-      budget: req.body.budget
+      ingredients: req.body.ingredients
     });
     res.status(204).end();
   }
